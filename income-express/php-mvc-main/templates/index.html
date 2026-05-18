@@ -15,58 +15,80 @@
     </style>
 </head>
 
-<body>
-    <div>
+<body class="text-gray-800 p-4">
+    <div class="max-w-md mx-auto">
 
-        <head>
-            <h1>สวัสดี🙌</h1>
-            <p>จัดการเงินของคุณวันนี้</p>
+        <head class="flex justify-between items-center mb-6">
+            <div class="mb-4">
+                <p class="text-5xl font-semibold text-green-900 mt-7">สวัสดี🙌</p>
+                <p class="text-xl font-semi text-green-900">จัดการเงินของคุณวันนี้</p>
+            </div>
+
             <div>
-                <input type="date" value="2026-06-26">
+                <input type="date" value="30-02-2026"
+                    class="border border-green-300 rounded-lg p-2 bg-white shadow-sm outline-none text-gray-600">
             </div>
         </head>
-        <section>
-            <h2>ภาพรวมวันนี้</h1>
-                <div>
-                    <p>รายรับ</p>
-                    <p>20000</p>
-                    <p>บาท</p>
-                </div>
-                <div>
-                    <p>รายจ่าย</p>
-                    <p>20000</p>
-                    <p>บาท</p>
-                </div>
-                <div>
-                    <p>คงเหลือ</p>
-                    <p>20000</p>
-                    <p>บาท</p>
-                </div>
-        </section>
-        <section>
-            <p>บันทึกรายการ</p>
-            <form action="">
-                <div>
-                    <button>รายรับ</button>
-                    <button>รายรับ</button>
-                </div>
-                <div>
-                    <label for="">จำนวนเงิน (บาท)</label>
-                    <input type="number" placeholder="0.00">
-                </div>
-                <div>
-                    <div class="flex space-x-2">
-                        <select name="" id="">
-                            <option value="">อาห</option>
-                        </select>
+
+        <section class="mb-8 mt-4">
+            <h2 class="text-2xl font-semibold mb-3">ภาพรวมวันนี้</h1>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class=" bg-white p-3  rounded-xl shadow-sm text-center border-t-4 border-green-500" >
+                        <p class="text-xs text-gray-500 mb-1">รายรับ</p>
+                        <p class="text-lg font-semibold text-green-600">20000</p>
+                        <p class="text-[10px] text-gray-400">บาท</p>
+                    </div>
+                    <div class=" bg-white p-3  rounded-xl shadow-sm text-center border-t-4 border-red-500" >
+                        <p class="text-xs text-gray-500 mb-1">รายจ่าย</p>
+                        <p class="text-lg font-semibold text-red-600">20000</p>
+                        <p class="text-[10px] text-gray-400">บาท</p>
+                    </div>
+                   <div class=" bg-white p-3  rounded-xl shadow-sm text-center border-t-4 border-orange-500" >
+                        <p class="text-xs text-gray-500 mb-1">คงเหลือ</p>
+                        <p class="text-lg font-semibold text-orange-600">20000</p>
+                        <p class="text-[10px] text-gray-400">บาท</p>
                     </div>
                 </div>
-                <div>
-                    <label for="">โน๊ต</label>
-                    <input type="text" name="" id="">
+    </section>
+
+    <section class="bg-white p-5 rounded-2xl shadow-sm">
+        <h2 class="text-2xl font-semibold mb-4">บันทึกรายการ</h2>
+        <form action="" class="space-">
+            <div>
+                <button>รายรับ</button>
+                <button>รายรับ</button>
+            </div>
+            <div>
+                <label for="">จำนวนเงิน (บาท)</label>
+                <input type="number" placeholder="0.00">
+            </div>
+            <div>
+                <div class="flex space-x-2">
+                    <select id="categorySelect"
+                        class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition bg-white">
+                        <!-- ตัวเลือกจะถูกสร้างด้วย JavaScript -->
+                    </select>
+                    <button type="button" id="showAddCategoryBtn"
+                        class="bg-blue-50 text-blue-600 border border-blue-200 px-4 rounded-lg font-medium hover:bg-blue-100 transition whitespace-nowrap">
+                        + เพิ่ม
+                    </button>
                 </div>
-            </form>
-        </section>
+            </div>
+            <div>
+                <label for="">โน๊ต</label>
+                <input type="text" name="" id="">
+            </div>
+            <div>
+                <input type="text" id="newCategoryInput"
+                    class="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50"
+                    placeholder="พิมพ์หมวดหมู่ใหม่...">
+                <button type="button" id="saveCategoryBtn"
+                    class="bg-green-500 text-white px-4 rounded-lg text-sm font-medium hover:bg-green-600 transition whitespace-nowrap">
+                    ตกลง
+                </button>
+            </div>
+        </form>
+    </section>
     </div>
 </body>
 

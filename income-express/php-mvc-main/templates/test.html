@@ -10,13 +10,12 @@
     <style>
         body {
             font-family: 'Prompt', sans-serif;
-            background-color: #FEF9F1; /* สีพื้นหลังสไตล์มินิมอลที่คุณเลือกไว้ */
+            background-color: #FEF9F1;
         }
     </style>
 </head>
 
 <body class="text-gray-800 p-4 md:p-8">
-    <!-- กล่องหลัก (จำลองขนาดให้ดูเหมือนแอปมือถือเพื่อความอ่านง่าย) -->
     <div class="max-w-md mx-auto">
 
         <!-- ส่วนหัว (Header) -->
@@ -26,7 +25,6 @@
                 <p class="text-sm text-gray-500">จัดการเงินของคุณวันนี้</p>
             </div>
             <div>
-                <!-- อัปเดตให้เป็นวันที่ปัจจุบัน -->
                 <input type="date" value="2026-05-18" class="border border-gray-200 rounded-lg p-2 text-sm bg-white shadow-sm outline-none text-gray-600">
             </div>
         </header>
@@ -35,19 +33,16 @@
         <section class="mb-8">
             <h2 class="text-lg font-semibold mb-3">ภาพรวมวันนี้</h2>
             <div class="grid grid-cols-3 gap-3">
-                <!-- รายรับ -->
                 <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-green-500">
                     <p class="text-xs text-gray-500 mb-1">รายรับ</p>
                     <p class="text-lg font-semibold text-green-600">20,000</p>
                     <p class="text-[10px] text-gray-400">บาท</p>
                 </div>
-                <!-- รายจ่าย -->
                 <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-red-500">
                     <p class="text-xs text-gray-500 mb-1">รายจ่าย</p>
                     <p class="text-lg font-semibold text-red-600">5,000</p>
                     <p class="text-[10px] text-gray-400">บาท</p>
                 </div>
-                <!-- คงเหลือ -->
                 <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-blue-500">
                     <p class="text-xs text-gray-500 mb-1">คงเหลือ</p>
                     <p class="text-lg font-semibold text-blue-600">15,000</p>
@@ -61,10 +56,10 @@
             <h2 class="text-lg font-semibold mb-4">บันทึกรายการ</h2>
             
             <form class="space-y-4">
-                <!-- ปุ่มเลือกว่าเป็นรายรับหรือรายจ่าย -->
+                <!-- ปุ่มเลือกว่าเป็นรายรับหรือรายจ่าย (เพิ่ม ID เข้าไป) -->
                 <div class="grid grid-cols-2 gap-3">
-                    <button type="button" class="py-2 bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 transition">รายรับ</button>
-                    <button type="button" class="py-2 bg-gray-100 text-gray-600 rounded-lg font-medium hover:bg-red-100 hover:text-red-700 transition">รายจ่าย</button>
+                    <button type="button" id="btnIncome" class="py-2 bg-gray-100 text-gray-600 rounded-lg font-medium transition">รายรับ</button>
+                    <button type="button" id="btnExpense" class="py-2 bg-red-100 text-red-700 rounded-lg font-medium transition">รายจ่าย</button>
                 </div>
 
                 <!-- ช่องกรอกจำนวนเงิน -->
@@ -73,32 +68,132 @@
                     <input type="number" class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition" placeholder="0.00">
                 </div>
 
-                <!-- ช่องกรอกหมวดหมู่/รายละเอียด -->
+                <!-- หมวดหมู่ -->
                 <div>
-                    <label class="block text-sm text-gray-600 mb-1">ประเภท</label>
-                   <div class="flex space-x-2">
-                        <!-- Dropdown เลือกหมวดหมู่ -->
+                    <label class="block text-sm text-gray-600 mb-1">หมวดหมู่</label>
+                    <div class="flex space-x-2">
                         <select id="categorySelect" class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition bg-white">
-                            <option value="" disabled selected>เลือกหมวดหมู่</option>
-                            <option value="อาหาร">อาหาร</option>
-                            <option value="เดินทาง">เดินทาง</option>
-                            <option value="เงินเดือน">เงินเดือน</option>
+                            <!-- ตัวเลือกจะถูกสร้างด้วย JavaScript -->
                         </select>
-                        <!-- ปุ่มเปิดกล่องเพิ่มหมวดหมู่ -->
                         <button type="button" id="showAddCategoryBtn" class="bg-blue-50 text-blue-600 border border-blue-200 px-4 rounded-lg font-medium hover:bg-blue-100 transition whitespace-nowrap">
                             + เพิ่ม
                         </button>
                     </div>
+
+                    <div id="addCategoryBox" class="hidden mt-2 flex space-x-2">
+                        <input type="text" id="newCategoryInput" class="w-full border border-gray-200 rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50" placeholder="พิมพ์หมวดหมู่ใหม่...">
+                        <button type="button" id="saveCategoryBtn" class="bg-green-500 text-white px-4 rounded-lg text-sm font-medium hover:bg-green-600 transition whitespace-nowrap">
+                            ตกลง
+                        </button>
+                    </div>
+                </div>
+
+                <!-- หมายเหตุ -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">หมายเหตุ (ไม่บังคับ)</label>
+                    <input type="text" class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition" placeholder="เช่น กินข้าวกับเพื่อน...">
                 </div>
 
                 <!-- ปุ่มบันทึก -->
                 <button type="button" class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition mt-2">
-                    บันทึกข้อมูล
+                    บันทึกรายการ
                 </button>
             </form>
         </section>
 
     </div>
+
+    <script>
+        // 1. กำหนดข้อมูลหมวดหมู่แยกประเภทกัน
+        const categoriesData = {
+            income: ["เงินเดือน", "โบนัส", "ขายของ", "เงินคืน"],
+            expense: ["อาหาร", "เดินทาง", "ของใช้ส่วนตัว", "ค่าน้ำค่าไฟ"]
+        };
+
+        // ตัวแปรเก็บว่าตอนนี้กำลังเลือก "รายรับ" หรือ "รายจ่าย" (ตั้งค่าเริ่มต้นเป็นรายจ่าย)
+        let currentTransactionType = "expense";
+
+        // ดึง Element จาก HTML
+        const btnIncome = document.getElementById('btnIncome');
+        const btnExpense = document.getElementById('btnExpense');
+        const categorySelect = document.getElementById('categorySelect');
+        const showAddCategoryBtn = document.getElementById('showAddCategoryBtn');
+        const addCategoryBox = document.getElementById('addCategoryBox');
+        const newCategoryInput = document.getElementById('newCategoryInput');
+        const saveCategoryBtn = document.getElementById('saveCategoryBtn');
+
+        // 2. ฟังก์ชันอัปเดตหน้าตาปุ่มและตัวเลือก Dropdown
+        function updateUI() {
+            // เคลียร์ตัวเลือกเดิมใน Dropdown
+            categorySelect.innerHTML = '<option value="" disabled selected>เลือกหมวดหมู่</option>';
+            
+            // ดึงข้อมูลหมวดหมู่มาแสดงตามประเภทที่เลือกอยู่
+            categoriesData[currentTransactionType].forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.text = category;
+                categorySelect.appendChild(option);
+            });
+
+            // เปลี่ยนสีปุ่มให้รู้ว่ากำลังเลือกอะไรอยู่
+            if (currentTransactionType === 'income') {
+                btnIncome.className = "py-2 bg-green-100 text-green-700 rounded-lg font-medium transition";
+                btnExpense.className = "py-2 bg-gray-100 text-gray-600 rounded-lg font-medium transition";
+            } else {
+                btnIncome.className = "py-2 bg-gray-100 text-gray-600 rounded-lg font-medium transition";
+                btnExpense.className = "py-2 bg-red-100 text-red-700 rounded-lg font-medium transition";
+            }
+        }
+
+        // 3. ใส่ Event ให้ปุ่มรายรับ-รายจ่ายทำงาน
+        btnIncome.addEventListener('click', () => {
+            currentTransactionType = 'income';
+            updateUI();
+        });
+
+        btnExpense.addEventListener('click', () => {
+            currentTransactionType = 'expense';
+            updateUI();
+        });
+
+        // 4. ระบบเพิ่มหมวดหมู่ (แยกเก็บตามประเภทที่กำลังเลือกอยู่)
+        showAddCategoryBtn.addEventListener('click', () => {
+            addCategoryBox.classList.toggle('hidden');
+            if (!addCategoryBox.classList.contains('hidden')) {
+                newCategoryInput.focus();
+            }
+        });
+
+        saveCategoryBtn.addEventListener('click', () => {
+            const newCategoryValue = newCategoryInput.value.trim();
+            if (newCategoryValue !== "") {
+                // เพิ่มข้อมูลเข้าไปใน Array ตามประเภทที่เลือก (income หรือ expense)
+                categoriesData[currentTransactionType].push(newCategoryValue);
+                
+                // อัปเดต Dropdown ใหม่
+                updateUI();
+                
+                // ให้เลือกหมวดหมู่ที่เพิ่งเพิ่มทันที
+                categorySelect.value = newCategoryValue;
+                
+                // เคลียร์ช่อง
+                newCategoryInput.value = '';
+                addCategoryBox.classList.add('hidden');
+            } else {
+                alert("กรุณาพิมพ์ชื่อหมวดหมู่ที่ต้องการเพิ่มครับ");
+            }
+        });
+
+        newCategoryInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveCategoryBtn.click();
+            }
+        });
+
+        // เรียกใช้ตอนเปิดหน้าเว็บครั้งแรก เพื่อให้โหลดข้อมูลเริ่มต้น
+        updateUI();
+    </script>
 </body>
 
 </html>
