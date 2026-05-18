@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Express - ระบบจัดการเงินรายวัน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #FEF9F1; /* สีพื้นหลังสไตล์มินิมอลที่คุณเลือกไว้ */
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 p-4 md:p-8">
+    <!-- กล่องหลัก (จำลองขนาดให้ดูเหมือนแอปมือถือเพื่อความอ่านง่าย) -->
+    <div class="max-w-md mx-auto">
+
+        <!-- ส่วนหัว (Header) -->
+        <header class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-900">สวัสดี🙌</h1>
+                <p class="text-sm text-gray-500">จัดการเงินของคุณวันนี้</p>
+            </div>
+            <div>
+                <!-- อัปเดตให้เป็นวันที่ปัจจุบัน -->
+                <input type="date" value="2026-05-18" class="border border-gray-200 rounded-lg p-2 text-sm bg-white shadow-sm outline-none text-gray-600">
+            </div>
+        </header>
+
+        <!-- ส่วนภาพรวม (Overview) -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold mb-3">ภาพรวมวันนี้</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <!-- รายรับ -->
+                <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-green-500">
+                    <p class="text-xs text-gray-500 mb-1">รายรับ</p>
+                    <p class="text-lg font-semibold text-green-600">20,000</p>
+                    <p class="text-[10px] text-gray-400">บาท</p>
+                </div>
+                <!-- รายจ่าย -->
+                <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-red-500">
+                    <p class="text-xs text-gray-500 mb-1">รายจ่าย</p>
+                    <p class="text-lg font-semibold text-red-600">5,000</p>
+                    <p class="text-[10px] text-gray-400">บาท</p>
+                </div>
+                <!-- คงเหลือ -->
+                <div class="bg-white p-3 rounded-xl shadow-sm text-center border-t-4 border-blue-500">
+                    <p class="text-xs text-gray-500 mb-1">คงเหลือ</p>
+                    <p class="text-lg font-semibold text-blue-600">15,000</p>
+                    <p class="text-[10px] text-gray-400">บาท</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนบันทึกรายการ (Add Transaction) -->
+        <section class="bg-white p-5 rounded-2xl shadow-sm">
+            <h2 class="text-lg font-semibold mb-4">บันทึกรายการ</h2>
+            
+            <form class="space-y-4">
+                <!-- ปุ่มเลือกว่าเป็นรายรับหรือรายจ่าย -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" class="py-2 bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 transition">รายรับ</button>
+                    <button type="button" class="py-2 bg-gray-100 text-gray-600 rounded-lg font-medium hover:bg-red-100 hover:text-red-700 transition">รายจ่าย</button>
+                </div>
+
+                <!-- ช่องกรอกจำนวนเงิน -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">จำนวนเงิน (บาท)</label>
+                    <input type="number" class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition" placeholder="0.00">
+                </div>
+
+                <!-- ช่องกรอกหมวดหมู่/รายละเอียด -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">รายละเอียด</label>
+                    <input type="text" class="w-full border border-gray-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-400 transition" placeholder="เช่น ค่าอาหาร, ค่าเดินทาง, เงินเดือน">
+                </div>
+
+                <!-- ปุ่มบันทึก -->
+                <button type="button" class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition mt-2">
+                    บันทึกข้อมูล
+                </button>
+            </form>
+        </section>
+
+    </div>
+</body>
+
+</html>
